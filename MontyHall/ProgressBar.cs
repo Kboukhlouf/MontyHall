@@ -38,8 +38,8 @@ namespace MontyHall
 
 		public void Display()
 		{
-			if (_progressPercent == 0.00d) Console.Write("[");
-			if (_progressPercent == 100.00d) Console.WriteLine("]");
+			if (_progress == 0) Console.Write("[");
+			if (_progress == _overall) Console.WriteLine("]");
 			if ((_progressPercent - _previousProgressPercent) > 1.00d)
 			{
 				Console.Write("|");

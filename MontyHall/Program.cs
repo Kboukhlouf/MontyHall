@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MontyHall
@@ -29,15 +30,15 @@ namespace MontyHall
 
 			start:
 			Console.Clear();
-			Console.WriteLine("Chose how many times you want to run the experiment?");
-			if(Int64.TryParse(Console.ReadLine().ToString(), out numberOfTimes))
+			Console.WriteLine("Chose how many times you want to run the experiment?\nP.S : 10 digits max or your program will not finish ;)");
+			string userInput = Console.ReadLine().ToString();
+			if(userInput.ToCharArray().LongLength < 10 && Int64.TryParse(Console.ReadLine().ToString(), out numberOfTimes))
 			{
-				Prize[] results = new Prize[numberOfTimes];
+				List<Prize> results = new List<Prize>();
 				ProgressBar bar = new ProgressBar(numberOfTimes);
 
 				for(int i=0; i< numberOfTimes; i++)
 				{
-
 					//Setting possibilities
 					for (int l = 0; l < 3; l++) possibilities[l] = Prize.GOAT;
 					int car = random.Next(3);
@@ -70,7 +71,7 @@ namespace MontyHall
 							}
 						}
 
-						results[i] = possibilities[userChoice];
+						results.Add(possibilities[userChoice]);
 					}
 					else
 					{
@@ -87,13 +88,15 @@ namespace MontyHall
 							}
 						}
 
-						results[i] = possibilities[userChoice];
+						results.Add(possibilities[userChoice]);
 					}
 
 					bar.IncrementAndDisplay();
 				}
 
-				Console.WriteLine("Your possibility of winning is : " +((double)results.Where(r => r.Equals(Prize.CAR)).LongCount() / numberOfTimes).ToString("0.00%"));
+				string result = ((double)results.Where(r => r.Equals(Prize.CAR)).LongCount() / numberOfTimes).ToString("0.00%");
+
+				Console.WriteLine("Your possibility of winning is : {0}", result);
 				Console.ReadKey();
 			}
 			else
@@ -111,6 +114,7 @@ namespace MontyHall
 			}
 			else
 			{
+				Console.Clear();
 				goto play_again;
 			}
 
