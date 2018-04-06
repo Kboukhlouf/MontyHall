@@ -33,9 +33,11 @@ namespace MontyHall
 			if(Int64.TryParse(Console.ReadLine().ToString(), out numberOfTimes))
 			{
 				Prize[] results = new Prize[numberOfTimes];
+				ProgressBar bar = new ProgressBar(numberOfTimes);
 
 				for(int i=0; i< numberOfTimes; i++)
 				{
+
 					//Setting possibilities
 					for (int l = 0; l < 3; l++) possibilities[l] = Prize.GOAT;
 					int car = random.Next(3);
@@ -87,6 +89,8 @@ namespace MontyHall
 
 						results[i] = possibilities[userChoice];
 					}
+
+					bar.IncrementAndDisplay();
 				}
 
 				Console.WriteLine("Your possibility of winning is : " +((double)results.Where(r => r.Equals(Prize.CAR)).LongCount() / numberOfTimes).ToString("0.00%"));
