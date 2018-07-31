@@ -32,7 +32,7 @@ namespace MontyHall
 			Console.Clear();
 			Console.WriteLine("Chose how many times you want to run the experiment?\nP.S : 10 digits max or your program will not finish ;)");
 			string userInput = Console.ReadLine().ToString();
-			if(userInput.ToCharArray().LongLength < 10 && Int64.TryParse(Console.ReadLine().ToString(), out numberOfTimes))
+			if(userInput.ToCharArray().LongLength < 10 && Int64.TryParse(userInput, out numberOfTimes))
 			{
 				List<Prize> results = new List<Prize>();
 				ProgressBar bar = new ProgressBar(numberOfTimes);
